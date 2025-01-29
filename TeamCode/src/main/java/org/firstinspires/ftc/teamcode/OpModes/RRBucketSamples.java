@@ -65,6 +65,8 @@ public class RRBucketSamples extends LinearOpMode{
         robot.init(hardwareMap, false);
         mechOps = new MSMechOps(robot, opMode, params);
 
+        mechOps.restractStrings();
+
         robot.servoSpice.setPosition(params.SPICE_CLOSE);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoBar.setPosition(params.Bar_Auto);

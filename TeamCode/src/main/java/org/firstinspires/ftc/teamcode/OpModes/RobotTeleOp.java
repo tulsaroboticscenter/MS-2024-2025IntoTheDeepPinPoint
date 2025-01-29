@@ -190,7 +190,7 @@ public class RobotTeleOp extends LinearOpMode {
             if (gamepad1.b) {
                 //circle
                 robot.servoWrist.setPosition(params.Wrist_Release);
-                robot.servoBar.setPosition(params.Bar_Auto);
+               // robot.servoBar.setPosition(params.Bar_Auto);
                 robot.servoBucket.setPosition(params.Bucket_Catch);
 
                 mBase = params.LIFT_RESET;

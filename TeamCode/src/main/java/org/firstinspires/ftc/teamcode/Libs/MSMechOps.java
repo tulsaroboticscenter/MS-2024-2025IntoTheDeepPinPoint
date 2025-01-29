@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Libs;
 import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -11,6 +12,7 @@ import static com.qualcomm.robotcore.util.ElapsedTime.Resolution.SECONDS;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile2;
 import org.firstinspires.ftc.teamcode.Hardware.MSParams;
 import com.qualcomm.robotcore.util.Range;
@@ -134,5 +136,18 @@ public class MSMechOps {
     }
 
 
+    public void restractStrings(){
+        int encoderTicks = 0;
+        robot.motorLift.setPower(1);
+        while (robot.motorLift.getCurrent(CurrentUnit.AMPS) < 3){
+            encoderTicks = encoderTicks - 10;
+            robot.motorLift.setTargetPosition(encoderTicks);
+            opMode.telemetry.addData("MotorLift Current = ", robot.motorLift.getCurrent(CurrentUnit.AMPS));
+            opMode.telemetry.update();
+        }
+        robot.motorLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorLift.setTargetPosition(0);
+        robot.motorLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 
 }

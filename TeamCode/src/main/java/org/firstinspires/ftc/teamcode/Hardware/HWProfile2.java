@@ -158,7 +158,7 @@ public class HWProfile2 {
 
         motorLift = ahwMap.get(DcMotorEx.class, "motorLift");
         motorLift.setDirection(DcMotor.Direction.REVERSE);
-        motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         motorLift.setTargetPosition(0);
         motorLift.setPower(0);
         motorLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
