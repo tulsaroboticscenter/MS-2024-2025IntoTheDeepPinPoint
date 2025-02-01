@@ -58,7 +58,7 @@ import java.util.Locale;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Robot: TeleOp POV", group="Robot")
+@TeleOp(name="Robot: TeleOp POV", group="Competition")
 public class RobotTeleOp extends LinearOpMode {
 
     private final static HWProfile2 robot = new HWProfile2();
@@ -76,9 +76,9 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.update();
 
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
-        robot.servoWrist.setPosition(params.Wrist_Up);
+        robot.servoWrist.setPosition(params.Wrist_Auto);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoBar.setPosition(params.Bar_Up);
+        robot.servoBar.setPosition(params.Bar_Auto);
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoBucket.setPosition(params.Bucket_Catch);

@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.Libs.MSMechOps;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 //@Disabled
-@Autonomous(name = "Auto - Samples Bucket", group = "Competition", preselectTeleOp = "RobotTeleOp")
+@Autonomous(name = "Auto - Samples Bucket", group = "Competition", preselectTeleOp = "Robot: TeleOp POV")
 public class RRBucketSamples extends LinearOpMode{
 
     public static String TEAM_NAME = "Mouse Spit";

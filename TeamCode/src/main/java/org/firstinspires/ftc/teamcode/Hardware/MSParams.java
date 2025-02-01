@@ -44,7 +44,7 @@ public class MSParams {
     public final int LIFT_Top_B = 1950 ;
     public final int LIFT_Bottom_B = 401;
 
-    public final int LIFT_Auto_Park =910;
+    public final int LIFT_Auto_Park =990;
 
     //wrist camands
     public final double Wrist_Up = .98;
