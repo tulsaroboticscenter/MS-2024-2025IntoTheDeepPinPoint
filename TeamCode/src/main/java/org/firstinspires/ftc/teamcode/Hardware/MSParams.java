@@ -25,7 +25,7 @@ public class MSParams {
     public final double Bar_Up = 0.25;//22
     public final double Bar_Down = 0.62;//59
     public final double Bar_Middle = 0.16;
-    public final double Bar_Auto = .33;//3
+    public final double Bar_Auto = .32;//3
 
 
     //buckets
@@ -34,17 +34,17 @@ public class MSParams {
     public final double Bucket_Dump = 0.80; //0.70
 
     //LIFT postions
-    public final int LIFT_RESET = 0;
+    public final int LIFT_RESET = 20;
     public final int LIFT_MIN_LOW = 0;
-    public final int LIFT_CLIP_HIGH = 1400;
-    public final int LIFT_CLIP_SCORE = 1050;
+    public final int LIFT_CLIP_HIGH = 1420;
+    public final int LIFT_CLIP_SCORE = 1070;
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 2450;
     public final double LIFT_POWER = 0.5;
-    public final int LIFT_Top_B = 1950 ;
+    public final int LIFT_Top_B = 1970 ;
     public final int LIFT_Bottom_B = 401;
 
-    public final int LIFT_Auto_Park =990;
+    public final int LIFT_Auto_Park =1000;
 
     //wrist camands
     public final double Wrist_Up = .98;

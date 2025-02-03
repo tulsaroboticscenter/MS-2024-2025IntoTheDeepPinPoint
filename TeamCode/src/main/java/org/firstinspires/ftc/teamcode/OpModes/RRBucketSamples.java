@@ -71,7 +71,7 @@ public class RRBucketSamples extends LinearOpMode{
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoBar.setPosition(params.Bar_Auto);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoWrist.setPosition(params.Wrist_Box);
+        robot.servoWrist.setPosition(params.Wrist_Up);
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoBucket.setPosition(params.Bucket_Catch);

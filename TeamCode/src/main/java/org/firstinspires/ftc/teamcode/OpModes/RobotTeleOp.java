@@ -75,17 +75,18 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
 
+        robot.servoSpice.setPosition(params.SPICE_OPEN);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoWrist.setPosition(params.Wrist_Auto);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoBar.setPosition(params.Bar_Auto);
+        robot.servoBar.setPosition(params.Bar_Up);
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoBucket.setPosition(params.Bucket_Catch);
         robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-
+        //mechOps.restractStrings();
         // run until the end of the match (driver presses STOP)
         double leftPower = 0;
         double rightPower = 0;

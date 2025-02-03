@@ -139,7 +139,7 @@ public class MSMechOps {
     public void restractStrings(){
         int encoderTicks = 0;
         robot.motorLift.setPower(1);
-        while (robot.motorLift.getCurrent(CurrentUnit.AMPS) < 3){
+        while (robot.motorLift.getCurrent(CurrentUnit.AMPS) < 2.0){
             encoderTicks = encoderTicks - 10;
             robot.motorLift.setTargetPosition(encoderTicks);
             opMode.telemetry.addData("MotorLift Current = ", robot.motorLift.getCurrent(CurrentUnit.AMPS));
