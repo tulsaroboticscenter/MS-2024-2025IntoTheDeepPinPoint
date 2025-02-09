@@ -99,8 +99,10 @@ public class RRBucketSamples extends LinearOpMode{
         Pose2d yellowSample1Position = new Pose2d(0, 0, 0);
         Pose2d yellowSample2Position = new Pose2d(0, 0, 0);
         Pose2d yellowSample3Position = new Pose2d(0, 0, 0);
+        Pose2d yellowSample4Position = new Pose2d(0, 0, 0);
         Pose2d parkPrepPose = new Pose2d(0, 0, 0);
         Pose2d parkPose = new Pose2d(0, 0, 0);
+
         double waitSecondsBeforeDrop = 0;
         drive = new PinpointDrive(hardwareMap, initPose);
 
@@ -113,6 +115,7 @@ public class RRBucketSamples extends LinearOpMode{
         yellowSample1Position = new Pose2d(-9, 17, Math.toRadians(87));
         yellowSample2Position = new Pose2d(-19, 18, Math.toRadians(87.5));
         yellowSample3Position = new Pose2d(-19, 22, Math.toRadians(126));
+        yellowSample4Position = new Pose2d(25, 1.6, -1.3);
         parkPrepPose = new Pose2d(-16,50 , Math.toRadians(-180));
         parkPose = new Pose2d(18.6, 51, Math.toRadians(-180));
 
@@ -137,6 +140,24 @@ public class RRBucketSamples extends LinearOpMode{
 
 
         if (opModeIsActive()) mechOps.armoutGold();
+
+
+//        //pick sample 5
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        .strafeToLinearHeading(yellowSample3Position.position,yellowSample4Position.heading)
+//                        .build());
+//        //Transfer
+//        if (opModeIsActive()) mechOps.transfer();
+//        //drive to scoring
+//        if (opModeIsActive()) mechOps.liftPosition(params.LIFT_Top_B);
+//        Actions.runBlocking(
+//                drive.actionBuilder(drive.pose)
+//                        //   .strafeToLinearHeading(samplePreScoringPosition.position, samplePreScoringPosition.heading)
+//                        .strafeToLinearHeading(sampleScoringPosition.position, sampleScoringPosition.heading)
+//                        .build());
+//        if (opModeIsActive()) mechOps.AutoDump();
+
         //pick sample 1
        Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
