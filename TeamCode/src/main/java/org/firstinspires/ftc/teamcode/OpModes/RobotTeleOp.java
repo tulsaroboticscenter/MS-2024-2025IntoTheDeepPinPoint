@@ -74,6 +74,7 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
+        ElapsedTime Climb_Timer= new ElapsedTime();
 
         robot.servoSpice.setPosition(params.SPICE_OPEN);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
@@ -95,6 +96,7 @@ public class RobotTeleOp extends LinearOpMode {
         double TwistPosition = params.TWIST_HORIZONTAL;
         ElapsedTime buttonPressTimer = new ElapsedTime();
         boolean clawOpen = false;
+        int climbGrabStage = 1;
         double botHeading;
         double x, y, rx;
         double rotX, rotY;
@@ -268,7 +270,48 @@ public class RobotTeleOp extends LinearOpMode {
                 mBase=mBase-3;
             }
 
+            //Climb
+            if (gamepad2.x){
+                clawPosition = params.CLAW_OPEN;
+                robot.servoExtend.setPosition(params.Extend_Climb);
+                robot.servoExtendRight.setPosition(params.ExtendRight_Climb);
+                robot.servoBucket.setPosition(params.Bucket_Dump);
+                Climb_Timer.reset();
+                climbGrabStage = 2;
 
+            }else if (climbGrabStage == 2 && Climb_Timer.time()>1){
+                robot.servoWrist.setPosition(params.Wrist_Climb);
+                robot.servoBar.setPosition(params.Bar_Climb);
+                robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+
+                climbGrabStage = 3;
+
+            }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
+                clawPosition = params.CLAW_CLOSE;
+                climbGrabStage = 4;
+            } else if (climbGrabStage == 4 && Climb_Timer.time()>3) {
+                robot.servoBar.setPosition(params.Bar_Up);
+                robot.servoWrist.setPosition(params.Wrist_Auto);
+            }
+
+            if (gamepad2.right_bumper) {
+                if((buttonPressTimer.time() > 0.25) && clawOpen){
+                    clawPosition = params.CLAW_CLOSE;
+                    spicePosition = params.SPICE_CLOSE;
+                    clawOpen = false;
+                    buttonPressTimer.reset();
+                } else if(buttonPressTimer.time() > 0.25) {
+                    clawPosition = params.CLAW_OPEN;
+                    spicePosition = params.SPICE_OPEN;
+                    clawOpen = true;
+                    buttonPressTimer.reset();
+                }
+            }
+            if (gamepad2.y){
+                robot.servoBar.setPosition(params.Bar_Up);
+                robot.servoExtend.setPosition(params.ExtendRight_OUT);
+                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+            }
             // limit the max and min value of mBase
             // robot.servoBar.setPosition(barPosition);
             robot.servoClaw.setPosition(clawPosition);
