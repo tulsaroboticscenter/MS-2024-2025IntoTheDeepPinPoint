@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.ftc.GoBildaPinpointDriverRR;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,6 +22,8 @@ public class HWProfile2 {
     public final double GB_COUNTS_PER_ROTATION = 28;    // goBilda encoder value
     public final double MIN_PIDROTATE_POWER = 0.10;
 
+    public final int CLIMB = -6000;
+    public final int CLIMB_EXTEND = 0;
 
     /*
      *  Constants & variables for wheel parameters
@@ -60,7 +63,7 @@ public class HWProfile2 {
     public DcMotorEx motorRR;
 
     public DcMotorEx motorLift;
-
+    public DcMotorEx motorClimb;
     public Servo servoWrist;
     public Servo servoBar;
     public Servo servoExtend;
@@ -164,6 +167,13 @@ public class HWProfile2 {
         motorLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         motorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        motorClimb = ahwMap.get(DcMotorEx.class, "motorClimb");
+        motorClimb.setDirection(DcMotor.Direction.FORWARD);
+        motorClimb.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorClimb.setTargetPosition(0);
+        motorClimb.setPower(0);
+        motorClimb.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        motorClimb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /**
          * Initialize Servos

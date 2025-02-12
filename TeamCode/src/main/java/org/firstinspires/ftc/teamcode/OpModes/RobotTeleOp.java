@@ -104,6 +104,7 @@ public class RobotTeleOp extends LinearOpMode {
         double powerFactor = 1;
 
         int mBase = params.LIFT_RESET;
+        int climbBase = 0;
         while (opModeIsActive()) {
 
             /* ###########################################
@@ -283,7 +284,8 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoWrist.setPosition(params.Wrist_Climb);
                 robot.servoBar.setPosition(params.Bar_Climb);
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-
+                robot.motorClimb.setPower(1);
+                robot.motorClimb.setTargetPosition(robot.CLIMB_EXTEND);
                 climbGrabStage = 3;
 
             }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
@@ -292,36 +294,46 @@ public class RobotTeleOp extends LinearOpMode {
             } else if (climbGrabStage == 4 && Climb_Timer.time()>3) {
                 robot.servoBar.setPosition(params.Bar_Up);
                 robot.servoWrist.setPosition(params.Wrist_Auto);
+            } else if (climbGrabStage == 5){
+                robot.motorClimb.setPower(1);
+                climbBase =  robot.CLIMB;
+                clawPosition = params.CLAW_OPEN;
+                Climb_Timer.reset();
+                climbGrabStage = 6;
+            } else if (climbGrabStage == 6 && Climb_Timer.time()>.3){
+                robot.servoBar.setPosition(params.Bar_Auto);
+                robot.servoExtend.setPosition(params.Extend_OUT);
+                robot.servoWrist.setPosition(params.Wrist_Auto);
             }
 
-            if (gamepad2.right_bumper) {
-                if((buttonPressTimer.time() > 0.25) && clawOpen){
-                    clawPosition = params.CLAW_CLOSE;
-                    spicePosition = params.SPICE_CLOSE;
-                    clawOpen = false;
-                    buttonPressTimer.reset();
-                } else if(buttonPressTimer.time() > 0.25) {
-                    clawPosition = params.CLAW_OPEN;
-                    spicePosition = params.SPICE_OPEN;
-                    clawOpen = true;
-                    buttonPressTimer.reset();
-                }
-            }
+
+
             if (gamepad2.y){
                 robot.servoBar.setPosition(params.Bar_Up);
                 robot.servoExtend.setPosition(params.ExtendRight_OUT);
                 robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
             }
+             if (gamepad2.dpad_up){
+                 climbGrabStage=5;
+             }
+            if (gamepad2.right_trigger>0.3) {
+                robot.motorClimb.setPower(1);
+                climbBase=climbBase+10;
+            }
+
             // limit the max and min value of mBase
             // robot.servoBar.setPosition(barPosition);
             robot.servoClaw.setPosition(clawPosition);
             robot.servoSpice.setPosition(spicePosition);
             robot.servoTwist.setPosition(TwistPosition);
 
-            //if gamepad2 left trigger is active the range clip will not apply
-            if(!(gamepad2.left_trigger>0.3)) {
-                mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
-            }
+//            //if gamepad2 left trigger is active the range clip will not apply
+//            if(!(gamepad2.left_trigger>0.3)) {
+//                mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
+//            }
+
+
+            robot.motorClimb.setTargetPosition(climbBase);
 
             mechOps.liftPosition(mBase);
 

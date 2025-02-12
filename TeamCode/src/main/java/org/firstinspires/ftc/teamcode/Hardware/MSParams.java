@@ -21,7 +21,7 @@ public class MSParams {
     public final double Extend_OUT = 0.0;
     public final double ExtendRight_OUT = 1.0;
     public final double ExtendRight_Climb = 0.9;
-    public final double Extend_Climb = 0.1;
+    public final double Extend_Climb = 0.0;
     //bar
     public final double Bar_Up = 0.25;//22
     public final double Bar_Down = 0.62;//59
@@ -65,5 +65,4 @@ public class MSParams {
     //Specimen claw
     public final double SPICE_OPEN = 0.3;
     public final double SPICE_CLOSE = .57;
-
 }
