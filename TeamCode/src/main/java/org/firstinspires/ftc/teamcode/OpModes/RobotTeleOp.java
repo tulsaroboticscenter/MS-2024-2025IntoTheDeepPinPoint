@@ -200,7 +200,7 @@ public class RobotTeleOp extends LinearOpMode {
                 mBase = params.LIFT_RESET;
             }
 
-            if(gamepad1.dpad_left){
+            if(gamepad1.left_stick_button){
                 robot.servoWrist.setPosition(params.Wrist_Release);
                 robot.servoBar.setPosition(params.Bar_Auto);
                 mBase = params.LIFT_CLIP_HIGH;
@@ -211,7 +211,7 @@ public class RobotTeleOp extends LinearOpMode {
                 mBase = params.LIFT_CLIP_SCORE;
             }
 
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_left) {
                 //robot.servoClaw.setPosition(params.CLAW_OPEN);
                 clawPosition = params.CLAW_OPEN;
                 spicePosition = params.SPICE_OPEN;
@@ -271,8 +271,9 @@ public class RobotTeleOp extends LinearOpMode {
                 mBase=mBase-3;
             }
 
+
             //Climb
-            if (gamepad2.x){
+            if (gamepad1.right_stick_button){
                 clawPosition = params.CLAW_OPEN;
                 robot.servoExtend.setPosition(params.Extend_Climb);
                 robot.servoExtendRight.setPosition(params.ExtendRight_Climb);
@@ -285,7 +286,6 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoBar.setPosition(params.Bar_Climb);
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
                 robot.motorClimb.setPower(1);
-                robot.motorClimb.setTargetPosition(robot.CLIMB_EXTEND);
                 climbGrabStage = 3;
 
             }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
@@ -302,7 +302,7 @@ public class RobotTeleOp extends LinearOpMode {
                 climbGrabStage = 6;
             } else if (climbGrabStage == 6 && Climb_Timer.time()>.3){
                 robot.servoBar.setPosition(params.Bar_Auto);
-                robot.servoExtend.setPosition(params.Extend_OUT);
+                robot.servoExtend.setPosition(params.Extend_IN);
                 robot.servoWrist.setPosition(params.Wrist_Auto);
             }
 
@@ -313,8 +313,9 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.servoExtend.setPosition(params.ExtendRight_OUT);
                 robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
             }
-             if (gamepad2.dpad_up){
+             if (gamepad1.dpad_up && climbGrabStage == 4){
                  climbGrabStage=5;
+
              }
             if (gamepad2.right_trigger>0.3) {
                 robot.motorClimb.setPower(1);

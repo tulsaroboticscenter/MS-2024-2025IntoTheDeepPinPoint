@@ -22,8 +22,7 @@ public class HWProfile2 {
     public final double GB_COUNTS_PER_ROTATION = 28;    // goBilda encoder value
     public final double MIN_PIDROTATE_POWER = 0.10;
 
-    public final int CLIMB = -6000;
-    public final int CLIMB_EXTEND = 0;
+    public final int CLIMB = -5000;
 
     /*
      *  Constants & variables for wheel parameters
