@@ -75,6 +75,7 @@ public class RRBucketSamples extends LinearOpMode{
         robot.servoExtend.setPosition(params.Extend_IN);
         robot.servoExtendRight.setPosition(params.ExtendRight_IN);
         robot.servoBucket.setPosition(params.Bucket_Catch);
+        robot.servoFlag.setPosition(params.FLAG_DOWN);
 
         while (!isStopRequested() && !opModeIsActive()) {
             // Wait for the DS start button to be touched.
@@ -116,8 +117,8 @@ public class RRBucketSamples extends LinearOpMode{
         yellowSample2Position = new Pose2d(-19, 18, Math.toRadians(87.5));
         yellowSample3Position = new Pose2d(-19, 22, Math.toRadians(126));
         yellowSample4Position = new Pose2d(25, 1.6, -1.3);
-        parkPrepPose = new Pose2d(-16,50 , Math.toRadians(-180));
-        parkPose = new Pose2d(18.6, 51, Math.toRadians(-180));
+        parkPrepPose = new Pose2d(0,51 , Math.toRadians(0));
+        parkPose = new Pose2d(18.6, 52, Math.toRadians(0));
 
         // Raise Arm to high bar scoring position
 
@@ -213,7 +214,8 @@ public class RRBucketSamples extends LinearOpMode{
         if (opModeIsActive()) mechOps.AutoDump();
 
         //parking
-        if (opModeIsActive()) mechOps.AutoSubPark();
+        //if (opModeIsActive()) mechOps.AutoSubPark();  Removed when added flag Park
+        //if (opModeIsActive()) mechOps.AutoSubWinner();
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(parkPrepPose.position, parkPrepPose.heading)
@@ -223,7 +225,8 @@ public class RRBucketSamples extends LinearOpMode{
                 drive.actionBuilder(drive.pose)
                         .strafeToLinearHeading(parkPose.position, parkPose.heading)
                         .build());
-
+        if (opModeIsActive()) mechOps.AutoSubWinner();
+        safeWaitSeconds(1);
     }
 
     //method to wait safely with stop button working if needed. Use this instead of sleep

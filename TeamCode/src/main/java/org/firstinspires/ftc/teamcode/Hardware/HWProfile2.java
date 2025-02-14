@@ -71,6 +71,7 @@ public class HWProfile2 {
     public Servo servoClaw;
     public Servo servoTwist;
     public Servo servoSpice;
+    public Servo servoFlag;
 
     public GoBildaPinpointDriverRR pinpoint; // pinpoint CH i2C port 1
 
@@ -187,6 +188,7 @@ public class HWProfile2 {
         servoBucket = ahwMap.servo.get("servoBucket");
         servoExtendRight = ahwMap.servo.get("servoExtendRight");
         servoSpice = ahwMap.servo.get("servoSpice");
+        servoFlag = ahwMap.servo.get("servoFlag");
 
         // Zeroing Servos
         //servoIntake.setPower(0.5);

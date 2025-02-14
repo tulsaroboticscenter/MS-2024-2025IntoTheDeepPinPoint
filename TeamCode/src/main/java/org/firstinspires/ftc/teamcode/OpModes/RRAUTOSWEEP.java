@@ -64,6 +64,7 @@ public class RRAUTOSWEEP extends LinearOpMode{
         //TODO: Initialize hardware
         robot.init(hardwareMap, false);
         mechOps = new MSMechOps(robot, opMode, params);
+        mechOps.restractStrings();
 
         robot.servoSpice.setPosition(params.SPICE_CLOSE);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
@@ -135,8 +136,8 @@ public class RRAUTOSWEEP extends LinearOpMode{
         sweep1 = new Pose2d (-12, 37.5, 70);
         midwayPose2 = new Pose2d(-37, 29, Math.toRadians(102)); //pick middle 25  .-27 x=-33
         sweep2 = new Pose2d (-14, 30, 70);
-        midwayPose3 = new Pose2d(-37, 20, Math.toRadians(106));//pick first 15 x=-32
-        sweep3 = new Pose2d (-14, 20, 70);
+        midwayPose3 = new Pose2d(-38, 20, Math.toRadians(106));//pick first 15 x=-32
+        sweep3 = new Pose2d (-12, 20, 70);
         midwayPose4 = new Pose2d(-14, 28.2, Math.toRadians(44.5)); // drop off
 
         parkPose = new Pose2d(0, 9, Math.toRadians(90)); //-108

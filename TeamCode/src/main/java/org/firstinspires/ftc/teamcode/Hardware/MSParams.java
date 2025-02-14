@@ -14,20 +14,21 @@ public class MSParams {
     public final double ALIGN_ARM_HIGH = 0.0;
 
     //extend
-    public final double ExtendRight_IN = 0.5;
+    public final double ExtendRight_IN = 0.55;
     public final double Extend_IN = 0.45;
-    public final double ExtendRight_CATCH = 0.7;
-    public final double Extend_Catch = 0.3;
-    public final double Extend_OUT = 0.0;
-    public final double ExtendRight_OUT = 1.0;
-    public final double ExtendRight_Climb = 0.9;
-    public final double Extend_Climb = 0.0;
+    public final double ExtendRight_CATCH = 0.5;
+    public final double Extend_Catch = 0.5;
+    public final double ExtendRight_OUT = 0.15;
+    public final double Extend_OUT = 0.85;
+
+    public final double ExtendRight_Climb = 0.3;
+    public final double Extend_Climb = 0.7;
     //bar
     public final double Bar_Up = 0.25;//22
     public final double Bar_Down = 0.58;//59
     public final double Bar_Middle = 0.16;
     public final double Bar_Auto = .32;//3
-    public final double Bar_Climb = 0.1;
+    public final double Bar_Climb = 0.0;
     public final double Bar_Sweep = .62;
 
 
@@ -68,4 +69,8 @@ public class MSParams {
     //Specimen claw
     public final double SPICE_OPEN = 0.3;
     public final double SPICE_CLOSE = .57;
+
+    //Level 1 Flag
+    public final double FLAG_DOWN = 0.2;
+    public final double FLAG_UP = .59;
 }

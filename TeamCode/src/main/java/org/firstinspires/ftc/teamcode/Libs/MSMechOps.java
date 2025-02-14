@@ -146,7 +146,17 @@ public class MSMechOps {
         liftPosition(params.LIFT_Auto_Park);
         opMode.sleep(1500);
     }
-
+    public void AutoSubWinner(){
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
+        robot.servoBar.setPosition(params.Bar_Down);
+        robot.servoWrist.setPosition(params.Wrist_Auto);
+        robot.servoBucket.setPosition(params.Bucket_Down);
+        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        //robot.servoTwist.setPosition(params.TWIST_VERTICAL);
+        robot.servoClaw.setPosition(params.CLAW_OPEN);
+        robot.servoFlag.setPosition(params.FLAG_UP);
+    }
 
     public void restractStrings(){
         int encoderTicks = 0;
