@@ -132,17 +132,14 @@ public class RRAUTOSWEEP extends LinearOpMode{
         coloredSample3Position = new Pose2d(-35, -60, Math.toRadians(90));
         midwayPose0 = new Pose2d(-25, 9, Math.toRadians(103)); //Before first pick old
         midwayPose1 = new Pose2d(-37, 37.5, Math.toRadians(102)); //pick close to wall 35 x=-32
-        sweep1 = new Pose2d (-14, 37.5, 0);
-        midwayPose2 = new Pose2d(-37, 28, Math.toRadians(102)); //pick middle 25  .-27 x=-33
-        sweep2 = new Pose2d (-14, 28, 0);
+        sweep1 = new Pose2d (-12, 37.5, 70);
+        midwayPose2 = new Pose2d(-37, 29, Math.toRadians(102)); //pick middle 25  .-27 x=-33
+        sweep2 = new Pose2d (-14, 30, 70);
         midwayPose3 = new Pose2d(-37, 20, Math.toRadians(106));//pick first 15 x=-32
-        sweep3 = new Pose2d (-14, 20, 0);
+        sweep3 = new Pose2d (-14, 20, 70);
         midwayPose4 = new Pose2d(-14, 28.2, Math.toRadians(44.5)); // drop off
 
-
-
-
-        parkPose = new Pose2d(0, 40, Math.toRadians(-180));
+        parkPose = new Pose2d(0, 9, Math.toRadians(90)); //-108
 
         // Raise Arm to high bar scoring position
 
@@ -360,17 +357,15 @@ public class RRAUTOSWEEP extends LinearOpMode{
         if (opModeIsActive()) mechOps.openClaw();
 
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_MIN_LOW);
-        if (opModeIsActive()) mechOps.armout();
+        if (opModeIsActive()) mechOps.armoutwinner();
 
-        Actions.runBlocking(
-                drive.actionBuilder(drive.pose)
-                        .strafeToLinearHeading(grabSpecimenPosition.position, grabSpecimenPosition.heading)
-                        .build());
+
 
         //          Lower Lift
 
         Actions.runBlocking(
                 drive.actionBuilder(drive.pose)
+                       // .strafeToLinearHeading(specimenPreScoringPosition.position,specimenPreScoringPosition.heading)
                         .strafeToLinearHeading(parkPose.position, parkPose.heading)
                         .build());
 
