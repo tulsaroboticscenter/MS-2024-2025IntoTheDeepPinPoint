@@ -276,15 +276,19 @@ public class RobotTeleOp extends LinearOpMode {
             //Climb
             if (gamepad1.right_stick_button){
                 clawPosition = params.CLAW_OPEN;
-                robot.servoExtend.setPosition(params.Extend_Climb);
-                robot.servoExtendRight.setPosition(params.ExtendRight_Climb);
+                robot.servoExtend.setPosition(params.Extend_Climbo);
+                robot.servoExtendRight.setPosition(params.ExtendRight_Climbo);
+                robot.servoWrist.setPosition(params.Wrist_Climb);
+                robot.servoBar.setPosition(params.Bar_Climb);
                 robot.servoBucket.setPosition(params.Bucket_Dump);
                 Climb_Timer.reset();
                 climbGrabStage = 2;
 
             }else if (climbGrabStage == 2 && Climb_Timer.time()>1){
-                robot.servoWrist.setPosition(params.Wrist_Climb);
-                robot.servoBar.setPosition(params.Bar_Climb);
+                //robot.servoWrist.setPosition(params.Wrist_Climb);
+                //robot.servoBar.setPosition(params.Bar_Climb);
+                robot.servoExtend.setPosition(params.Extend_Climbi);
+                robot.servoExtendRight.setPosition(params.ExtendRight_Climbi);
                 robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
                 robot.motorClimb.setPower(1);
                 climbGrabStage = 3;

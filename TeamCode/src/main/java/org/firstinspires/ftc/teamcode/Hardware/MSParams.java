@@ -20,15 +20,16 @@ public class MSParams {
     public final double Extend_Catch = 0.5;
     public final double ExtendRight_OUT = 0.15;
     public final double Extend_OUT = 0.85;
-
-    public final double ExtendRight_Climb = 0.3;
-    public final double Extend_Climb = 0.7;
+    public final double ExtendRight_Climbo = 0.23;//20
+    public final double Extend_Climbo = 0.77;
+    public final double ExtendRight_Climbi = 0.29;//20
+    public final double Extend_Climbi = 0.71;
     //bar
     public final double Bar_Up = 0.25;//22
     public final double Bar_Down = 0.58;//59
     public final double Bar_Middle = 0.16;
     public final double Bar_Auto = .32;//3
-    public final double Bar_Climb = 0.0;
+    public final double Bar_Climb = 0.01;
     public final double Bar_Sweep = .62;
 
 
