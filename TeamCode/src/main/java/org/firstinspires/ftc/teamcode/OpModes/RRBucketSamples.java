@@ -69,7 +69,7 @@ public class RRBucketSamples extends LinearOpMode{
 
         robot.servoSpice.setPosition(params.SPICE_CLOSE);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
-        robot.servoBar.setPosition(params.Bar_Auto);
+        robot.servoBar.setPosition(params.Bar_Up);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
         robot.servoWrist.setPosition(params.Wrist_Up);
         robot.servoExtend.setPosition(params.Extend_IN);
@@ -124,6 +124,7 @@ public class RRBucketSamples extends LinearOpMode{
 
         // TODO: Add code to release the sample and lower the arm
         if (opModeIsActive()) robot.servoWrist.setPosition(params.Wrist_Auto);
+        if (opModeIsActive()) robot.servoBar.setPosition(params.Bar_Auto);
         if (opModeIsActive()) mechOps.liftPosition(params.LIFT_Top_B);
 
 

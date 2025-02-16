@@ -103,7 +103,6 @@ public class RobotTeleOp extends LinearOpMode {
         double rotX, rotY;
         double denominator, frontLeftPower, backLeftPower, frontRightPower, backRightPower;
         double powerFactor = 1;
-
         int mBase = params.LIFT_RESET;
         int climbBase = 0;
         while (opModeIsActive()) {
@@ -295,6 +294,7 @@ public class RobotTeleOp extends LinearOpMode {
 
             }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
                 clawPosition = params.CLAW_CLOSE;
+                robot.servoFlag.setPosition(params.FLAG_UP);
                 climbGrabStage = 4;
             } else if (climbGrabStage == 4 && Climb_Timer.time()>3) {
                 robot.servoBar.setPosition(params.Bar_Up);
@@ -303,6 +303,7 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.motorClimb.setPower(1);
                 climbBase =  robot.CLIMB;
                 clawPosition = params.CLAW_OPEN;
+               robot.servoFlag.setPosition(params.FLAG_DOWN);
                 Climb_Timer.reset();
                 climbGrabStage = 6;
             } else if (climbGrabStage == 6 && Climb_Timer.time()>.3){

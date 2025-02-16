@@ -42,7 +42,7 @@ public class MSParams {
     public final int LIFT_RESET = 20;
     public final int LIFT_MIN_LOW = 0;
     public final int LIFT_CLIP_HIGH = 1420;
-    public final int LIFT_CLIP_SCORE = 1070;
+    public final int LIFT_CLIP_SCORE = 1065;
     public final int LIFT_CLIP_LOW = 1050;
     public final int LIFT_MAX_HIGH = 2450;
     public final double LIFT_POWER = 0.5;
