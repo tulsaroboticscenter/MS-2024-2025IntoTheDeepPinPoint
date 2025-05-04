@@ -131,12 +131,12 @@ public class RRAUTOSWEEP extends LinearOpMode{
         coloredSample1Position = new Pose2d(-5, 30, Math.toRadians(-90));
         coloredSample2Position = new Pose2d(-35, -58, 90);
         coloredSample3Position = new Pose2d(-35, -60, Math.toRadians(90));
-        midwayPose0 = new Pose2d(-25, 9, Math.toRadians(103)); //Before first pick old
+        midwayPose0 = new Pose2d(-21, 15, Math.toRadians(103)); //Before first pick old (-29,9)
         midwayPose1 = new Pose2d(-37, 37.5, Math.toRadians(102)); //pick close to wall 35 x=-32
         sweep1 = new Pose2d (-12, 37.5, 70);
         midwayPose2 = new Pose2d(-37, 29, Math.toRadians(102)); //pick middle 25  .-27 x=-33
         sweep2 = new Pose2d (-14, 30, 70);
-        midwayPose3 = new Pose2d(-38, 20, Math.toRadians(106));//pick first 15 x=-32
+        midwayPose3 = new Pose2d(-34, 20, Math.toRadians(106));//pick first 15 x=-32
         sweep3 = new Pose2d (-12, 20, 70);
         midwayPose4 = new Pose2d(-14, 28.2, Math.toRadians(44.5)); // drop off
 
