@@ -25,12 +25,12 @@ public class MSParams {
     public final double ExtendRight_Climbi = 0.29;//20
     public final double Extend_Climbi = 0.71;
     //bar
-    public final double Bar_Up = 0.25;//22
-    public final double Bar_Down = 0.58;//59
+    public final double Bar_Up = 0.5;//22
+    public final double Bar_Down =0.375;
     public final double Bar_Middle = 0.16;
-    public final double Bar_Auto = .32;//3
-    public final double Bar_Climb = 0.01;
-    public final double Bar_Sweep = .62;
+    public final double Bar_Auto = .45;//3
+    public final double Bar_Climb = 0.57;
+    public final double Bar_Sweep = .36;
 
 
     //buckets
