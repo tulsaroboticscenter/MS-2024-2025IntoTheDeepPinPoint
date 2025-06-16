@@ -67,7 +67,7 @@ public class RRBucketSamples extends LinearOpMode{
 
         mechOps.restractStrings();
 
-        robot.servoSpice.setPosition(params.SPICE_CLOSE);
+        //robot.servoSpice.setPosition(params.SPICE_OPEN);
         robot.servoClaw.setPosition(params.CLAW_CLOSE);
         robot.servoBar.setPosition(params.Bar_Up);
         robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);

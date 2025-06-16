@@ -30,7 +30,7 @@ public class MSParams {
     public final double Bar_Middle = 0.16;
     public final double Bar_Auto = .45;//3
     public final double Bar_Climb = 0.57;
-    public final double Bar_Sweep = .36;
+    public final double Bar_Sweep = .35;
 
 
     //buckets
@@ -60,8 +60,8 @@ public class MSParams {
     public final double Wrist_Climb = .65;
     public final double Wrist_Sweep = .1;
 //Claw camands
-    public final double CLAW_OPEN = 0.65;
-    public final double CLAW_CLOSE = 0.33;
+    public final double CLAW_OPEN = 0.33; //.65
+    public final double CLAW_CLOSE = 0.65; //.33
 
     //twist camands
     public final double TWIST_HORIZONTAL = 0.3;
