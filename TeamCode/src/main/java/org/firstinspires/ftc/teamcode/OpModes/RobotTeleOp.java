@@ -75,7 +75,6 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.addData("Status:", "Initialized");
         telemetry.update();
         ElapsedTime Climb_Timer= new ElapsedTime();
-
         robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -117,10 +116,10 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.motorShooter.setPower(0);
             }
             if (gamepad1.right_bumper){
-                robot.servoFLIPPER.setPosition(params.Flipper_Out);
+                robot.servoFLIPPER.setPosition(.25);
             }
             if(gamepad1.left_bumper){
-                robot.servoFLIPPER.setPosition(params.Flipper_Reset);
+                robot.servoFLIPPER.setPosition(0);
             }
 //            if (gamepad1.a) {
 //                // X
