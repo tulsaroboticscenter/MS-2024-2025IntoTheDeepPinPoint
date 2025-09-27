@@ -30,7 +30,7 @@ public class MSParams {
     public final double Bar_Middle = 0.16;
     public final double Bar_Auto = .45;//3
     public final double Bar_Climb = 0.57;
-    public final double Bar_Sweep = .35;
+    public final double Bar_Sweep = .36;
 
 
     //buckets
@@ -48,7 +48,7 @@ public class MSParams {
     public final double LIFT_POWER = 0.5;
     public final int LIFT_Top_B = 1970 ;
     public final int LIFT_Bottom_B = 401;
-
+    public final int LIFT_Sweep =2300;
     public final int LIFT_Auto_Park =1000;
 
     //wrist camands

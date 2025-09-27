@@ -55,15 +55,11 @@ public class MSMechOps {
     }
 
     public void armout() {
-        robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-        robot.servoExtend.setPosition(params.Extend_IN);
-        robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoWrist.setPosition(params.Wrist_Down);
-        robot.servoBucket.setPosition(params.Bucket_Down);
-        //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
+        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+        robot.servoExtend.setPosition(params.Extend_OUT);
         robot.servoTwist.setPosition(params.TWIST_VERTICAL);
         robot.servoClaw.setPosition(params.CLAW_OPEN);
-
+        robot.se
 
     }
     public void armoutwinner() {

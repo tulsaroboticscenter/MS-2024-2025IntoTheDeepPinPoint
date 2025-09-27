@@ -123,21 +123,21 @@ public class RRAUTOSWEEP extends LinearOpMode{
         /*****************
          * Set values for RoadRunner Pathing
          */
-        specimenPrePreScoringPosition= new Pose2d(-10, 5, Math.toRadians(45));//old
-        specimenPreScoringPosition = new Pose2d(-20, -9, 0);
-        specimenScoringPosition = new Pose2d(-30, -10, 0);
+        specimenPrePreScoringPosition= new Pose2d(-15, 5, Math.toRadians(45));//old
+        specimenPreScoringPosition = new Pose2d(-18, -9, 0);
+        specimenScoringPosition = new Pose2d(-22, -12, 0);
         specimenScoringSlide = new Pose2d(-30, -15, 0);
-        grabSpecimenPosition = new Pose2d(-6, 23, Math.toRadians(-180));
+        grabSpecimenPosition = new Pose2d(-1, 27.33, Math.toRadians(-180));
         coloredSample1Position = new Pose2d(-5, 30, Math.toRadians(-90));
         coloredSample2Position = new Pose2d(-35, -58, 90);
         coloredSample3Position = new Pose2d(-35, -60, Math.toRadians(90));
         midwayPose0 = new Pose2d(-21, 15, Math.toRadians(103)); //Before first pick old (-29,9)
-        midwayPose1 = new Pose2d(-37, 37.5, Math.toRadians(102)); //pick close to wall 35 x=-32
-        sweep1 = new Pose2d (-12, 37.5, 70);
-        midwayPose2 = new Pose2d(-37, 29, Math.toRadians(102)); //pick middle 25  .-27 x=-33
-        sweep2 = new Pose2d (-14, 30, 70);
-        midwayPose3 = new Pose2d(-34, 20, Math.toRadians(106));//pick first 15 x=-32
-        sweep3 = new Pose2d (-12, 20, 70);
+        midwayPose1 = new Pose2d(-28.33, 18.7, Math.toRadians(120.7)); //pick close to wall 35 x=-32
+        sweep1 = new Pose2d (-32.7, 21, 42.27);
+        midwayPose2 = new Pose2d(-21.6, 13, Math.toRadians(130)); //pick middle 25  .-27 x=-33
+        sweep2 = new Pose2d (-27.51, 13.92, 54);
+        midwayPose3 = new Pose2d(-15.59, 6, Math.toRadians(134.71));//pick first 15 x=-32
+        sweep3 = new Pose2d (-21.8, 13, 61);
         midwayPose4 = new Pose2d(-14, 28.2, Math.toRadians(44.5)); // drop off
 
         parkPose = new Pose2d(0, 9, Math.toRadians(90)); //-108
@@ -145,10 +145,11 @@ public class RRAUTOSWEEP extends LinearOpMode{
         // Raise Arm to high bar scoring position
 
         // TODO: Add code to release the sample and lower the arm
-        if (opModeIsActive()) robot.servoSpice.setPosition(params.SPICE_CLOSE);
-        if (opModeIsActive()) robot.servoWrist.setPosition(params.Wrist_Auto);
+        if (opModeIsActive()) robot.servoSpice.setPosition(params.CLAW_CLOSE);
         if (opModeIsActive()) mechOps.raiseLift(params.LIFT_CLIP_HIGH);
-        if (opModeIsActive()) robot.servoBar.setPosition(params.Bar_Auto);
+        if (opModeIsActive()) robot.servoExtend.setPosition(params.Extend_OUT);
+        if (opModeIsActive()) robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
+
 
         telemetry.addData("x", drive.pose.position.x);
         telemetry.addData("y", drive.pose.position.y);
@@ -184,7 +185,7 @@ public class RRAUTOSWEEP extends LinearOpMode{
         telemetry.update();
 
         //          Lower Lift
-        if (opModeIsActive()) mechOps.raiseLift(params.LIFT_MIN_LOW);
+        if (opModeIsActive()) mechOps.raiseLift(params.LIFT_Sweep);
         if (opModeIsActive()) mechOps.armout();
         // Drive to color specimen Position
         // Push Color Sample1 into the Observation area

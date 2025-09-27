@@ -189,6 +189,7 @@ public class HWProfile2 {
         servoExtendRight = ahwMap.servo.get("servoExtendRight");
         servoSpice = ahwMap.servo.get("servoSpice");
         servoFlag = ahwMap.servo.get("servoFlag");
+        servoClaw
 
         // Zeroing Servos
         //servoIntake.setPower(0.5);
