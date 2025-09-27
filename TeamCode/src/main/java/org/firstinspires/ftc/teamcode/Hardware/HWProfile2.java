@@ -60,18 +60,10 @@ public class HWProfile2 {
     public DcMotorEx motorLR;
     public DcMotorEx motorRF;
     public DcMotorEx motorRR;
+    public DcMotorEx motorShooter;
 
-    public DcMotorEx motorLift;
-    public DcMotorEx motorClimb;
-    public Servo servoWrist;
-    public Servo servoBar;
-    public Servo servoExtend;
-    public Servo servoExtendRight;
-    public Servo servoBucket;
-    public Servo servoClaw;
-    public Servo servoTwist;
-    public Servo servoSpice;
-    public Servo servoFlag;
+    public Servo servoFLIPPER;
+
 
     public GoBildaPinpointDriverRR pinpoint; // pinpoint CH i2C port 1
 
@@ -123,6 +115,14 @@ public class HWProfile2 {
             motorRR.setPower(0);
             motorRR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+//            motorShooter = ahwMap.get(DcMotorEx.class, "motorShooter");
+//            motorShooter.setDirection(DcMotor.Direction.FORWARD);
+//            motorShooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            motorShooter.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+//            motorShooter.setPower(0);
+//            motorShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
             // Retrieve and initialize the IMU.
             // This sample expects the IMU to be in a REV Hub and named "imu".
             imu = ahwMap.get(IMU.class, "imu");
@@ -156,40 +156,20 @@ public class HWProfile2 {
             imu.initialize(new IMU.Parameters(orientationOnRobot));
 
         }
-        //drivebase init
-//        mecanum = new MecanumDrive(motorLF, motorRF, motorLR, motorRR);
 
-        motorLift = ahwMap.get(DcMotorEx.class, "motorLift");
-        motorLift.setDirection(DcMotor.Direction.REVERSE);
-        //motorLift.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        motorLift.setTargetPosition(0);
-        motorLift.setPower(0);
-        motorLift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        motorLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorShooter = ahwMap.get(DcMotorEx.class, "motorShooter");
+        motorShooter.setDirection(DcMotor.Direction.FORWARD);
+        motorShooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorShooter.setTargetPosition(0);
+        motorShooter.setPower(0);
+        motorShooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        motorShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        motorClimb = ahwMap.get(DcMotorEx.class, "motorClimb");
-        motorClimb.setDirection(DcMotor.Direction.FORWARD);
-        motorClimb.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        motorClimb.setTargetPosition(0);
-        motorClimb.setPower(0);
-        motorClimb.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        motorClimb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /**
          * Initialize Servos
          **/
-        //servoGrabber = hwMap.servo.get("servoGrabber");
-        // servoGrabber2 = hwMap.servo.get("servoGrabber2");
-        servoClaw = ahwMap.servo.get("servoClaw");
-        servoTwist = ahwMap.servo.get("servoTwist");
-        servoWrist = ahwMap.servo.get("servoWrist");
-        servoBar = ahwMap.servo.get("servoBar");
-        servoExtend = ahwMap.servo.get("servoExtend");
-        servoBucket = ahwMap.servo.get("servoBucket");
-        servoExtendRight = ahwMap.servo.get("servoExtendRight");
-        servoSpice = ahwMap.servo.get("servoSpice");
-        servoFlag = ahwMap.servo.get("servoFlag");
-        servoClaw
+
 
         // Zeroing Servos
         //servoIntake.setPower(0.5);

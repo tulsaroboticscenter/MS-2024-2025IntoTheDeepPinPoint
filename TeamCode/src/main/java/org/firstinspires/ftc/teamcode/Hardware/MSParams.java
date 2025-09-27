@@ -60,8 +60,8 @@ public class MSParams {
     public final double Wrist_Climb = .65;
     public final double Wrist_Sweep = .1;
 //Claw camands
-    public final double CLAW_OPEN = 0.33; //.65
-    public final double CLAW_CLOSE = 0.65; //.33
+    public final double Flipper_Out = 0.65; //.65
+    public final double Flipper_Reset = 0.33; //.33
 
     //twist camands
     public final double TWIST_HORIZONTAL = 0.3;

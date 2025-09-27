@@ -456,10 +456,6 @@ public class DriveMecanumFTCLib {
 
         return rotationalAngle;
     }   // end method gyro360
-    public void liftPosition(int targetPosition){
-        robot.motorLift.setPower(params.LIFT_POWER);
-        robot.motorLift.setTargetPosition(targetPosition);
-    }   // end of liftPosition method
 
 
 

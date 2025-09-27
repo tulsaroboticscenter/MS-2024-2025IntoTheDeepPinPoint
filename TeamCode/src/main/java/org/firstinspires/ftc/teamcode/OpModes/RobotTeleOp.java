@@ -76,15 +76,6 @@ public class RobotTeleOp extends LinearOpMode {
         telemetry.update();
         ElapsedTime Climb_Timer= new ElapsedTime();
 
-        robot.servoSpice.setPosition(params.SPICE_OPEN);
-        robot.servoClaw.setPosition(params.CLAW_OPEN);
-        robot.servoWrist.setPosition(params.Wrist_Down);
-        robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-        robot.servoBar.setPosition(params.Bar_Down);
-        robot.servoExtend.setPosition(params.Extend_OUT);
-        robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-        robot.servoBucket.setPosition(params.Bucket_Down);
-        robot.servoFlag.setPosition(params.FLAG_DOWN);
         robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -92,9 +83,6 @@ public class RobotTeleOp extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         double leftPower = 0;
         double rightPower = 0;
-        double clawPosition = params.CLAW_OPEN;
-        double spicePosition = params.SPICE_OPEN;
-        double TwistPosition = params.TWIST_HORIZONTAL;
         ElapsedTime buttonPressTimer = new ElapsedTime();
         boolean clawOpen = false;
         int climbGrabStage = 1;
@@ -103,8 +91,6 @@ public class RobotTeleOp extends LinearOpMode {
         double rotX, rotY;
         double denominator, frontLeftPower, backLeftPower, frontRightPower, backRightPower;
         double powerFactor = 1;
-        int mBase = params.LIFT_RESET;
-        int climbBase = 0;
         while (opModeIsActive()) {
 
             /* ###########################################
@@ -124,7 +110,24 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.pinpoint.recalibrateIMU();
                 //recalibrates the IMU without resetting position
             }
-
+            if(gamepad1.x){
+                robot.motorShooter.setPower(1);
+            }
+            if(gamepad1.a){
+                robot.motorShooter.setPower(0);
+            }
+            if (gamepad1.right_bumper){
+                robot.servoFLIPPER.setPosition(params.Flipper_Out);
+            }
+            if(gamepad1.left_bumper){
+                robot.servoFLIPPER.setPosition(params.Flipper_Reset);
+            }
+//            if (gamepad1.a) {
+//                // X
+//                clawPosition = params.CLAW_OPEN;
+//                spicePosition = params.SPICE_OPEN;
+//                clawOpen = true;
+//            }
             robot.pinpoint.update();    //update the IMU value
             Pose2D pos = robot.pinpoint.getPosition();
             String data = String.format(Locale.US, "{X: %.3f, Y: %.3f, H: %.3f}", pos.getX(DistanceUnit.MM), pos.getY(DistanceUnit.MM), pos.getHeading(AngleUnit.RADIANS));
@@ -151,199 +154,6 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
 
-            if (gamepad1.y) {
-                // What Happens when we hit Y Triangle - Dump to transfer
-                robot.servoExtendRight.setPosition(params.ExtendRight_CATCH);
-                robot.servoExtend.setPosition(params.Extend_Catch);
-               // robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                TwistPosition = params.TWIST_HORIZONTAL;
-                robot.servoBucket.setPosition(params.Bucket_Catch);
-                robot.servoBar.setPosition(params.Bar_Up);
-                robot.servoWrist.setPosition(params.Wrist_Up);
-                mBase = params.LIFT_RESET;
-            }   // end of if(gamepad1.y)
-
-            if (gamepad1.x) {
-                // Square
-
-                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-                robot.servoExtend.setPosition(params.Extend_OUT);
-                robot.servoBar.setPosition(params.Bar_Down);
-                robot.servoWrist.setPosition(params.Wrist_Down);
-                robot.servoBucket.setPosition(params.Bucket_Down);
-                //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                TwistPosition = params.TWIST_HORIZONTAL;
-                clawPosition = params.CLAW_OPEN;
-                spicePosition = params.SPICE_OPEN;
-                clawOpen = true;
-                //robot.servoClaw.setPosition(params.CLAW_OPEN);
-
-            }   // end of if(gamepad1.x)
-
-            // A=X symbol
-            if (gamepad1.a) {
-                // X
-                clawPosition = params.CLAW_OPEN;
-                spicePosition = params.SPICE_OPEN;
-                clawOpen = true;
-                robot.servoWrist.setPosition(params.Wrist_Release);
-                robot.servoBar.setPosition(params.Bar_Auto);
-                robot.servoBucket.setPosition(params.Bucket_Dump);
-            }
-
-            if (gamepad1.b) {
-                //circle
-                robot.servoWrist.setPosition(params.Wrist_Release);
-               // robot.servoBar.setPosition(params.Bar_Auto);
-                robot.servoBucket.setPosition(params.Bucket_Catch);
-
-                mBase = params.LIFT_RESET;
-            }
-
-            if(gamepad1.left_stick_button){
-                robot.servoWrist.setPosition(params.Wrist_Release);
-                robot.servoBar.setPosition(params.Bar_Auto);
-                mBase = params.LIFT_CLIP_HIGH;
-            }
-
-            if(gamepad1.dpad_right){
-                //robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                mBase = params.LIFT_CLIP_SCORE;
-            }
-
-            if (gamepad1.dpad_left) {
-                //robot.servoClaw.setPosition(params.CLAW_OPEN);
-                clawPosition = params.CLAW_OPEN;
-                spicePosition = params.SPICE_OPEN;
-                clawOpen = true;
-                robot.servoWrist.setPosition(params.Wrist_Release);
-                robot.servoBar.setPosition(params.Bar_Auto);
-                mBase = params.LIFT_Top_B;
-            }
-
-            if (gamepad1.dpad_down) {
-                clawPosition = params.CLAW_OPEN;
-                spicePosition = params.SPICE_OPEN;
-                clawOpen = true;
-                //robot.servoClaw.setPosition(params.CLAW_OPEN);
-                robot.servoWrist.setPosition(params.Wrist_Release);
-                mBase = params.LIFT_Bottom_B;
-            }
-
-            if (gamepad1.right_bumper) {
-                if((buttonPressTimer.time() > 0.25) && clawOpen){
-                    clawPosition = params.CLAW_CLOSE;
-                    spicePosition = params.SPICE_CLOSE;
-                    clawOpen = false;
-                    buttonPressTimer.reset();
-                } else if(buttonPressTimer.time() > 0.25) {
-                    clawPosition = params.CLAW_OPEN;
-                    spicePosition = params.SPICE_OPEN;
-                    clawOpen = true;
-                    buttonPressTimer.reset();
-                }
-            }
-
-            if (gamepad1.left_bumper) {
-                    if((buttonPressTimer.time() > 0.25) && TwistPosition == params.TWIST_HORIZONTAL){
-                        TwistPosition = params.TWIST_VERTICAL;
-
-                        buttonPressTimer.reset();
-                    } else if(buttonPressTimer.time() > 0.25) {
-                        TwistPosition = params.TWIST_HORIZONTAL;
-
-                        buttonPressTimer.reset();
-                    }
-            }
-
-
-            if (gamepad1.right_trigger>0.3) {
-                mBase=mBase+3;
-            }
-
-            //Lower Slides
-            if (gamepad1.left_trigger>0.3) {
-                mBase=mBase-3;
-            }
-
-            //emergency down button
-            if (gamepad2.left_trigger>0.3){
-                mBase=mBase-3;
-            }
-
-
-            //Climb
-            if (gamepad1.right_stick_button){
-                clawPosition = params.CLAW_OPEN;
-                robot.servoExtend.setPosition(params.Extend_Climbo);
-                robot.servoExtendRight.setPosition(params.ExtendRight_Climbo);
-                robot.servoWrist.setPosition(params.Wrist_Climb);
-                robot.servoBar.setPosition(params.Bar_Climb);
-                robot.servoBucket.setPosition(params.Bucket_Dump);
-                Climb_Timer.reset();
-                climbGrabStage = 2;
-
-            }else if (climbGrabStage == 2 && Climb_Timer.time()>1){
-                //robot.servoWrist.setPosition(params.Wrist_Climb);
-                //robot.servoBar.setPosition(params.Bar_Climb);
-                robot.servoExtend.setPosition(params.Extend_Climbi);
-                robot.servoExtendRight.setPosition(params.ExtendRight_Climbi);
-                robot.servoTwist.setPosition(params.TWIST_HORIZONTAL);
-                robot.motorClimb.setPower(1);
-                climbGrabStage = 3;
-
-            }else if (climbGrabStage == 3 && Climb_Timer.time()>2){
-                clawPosition = params.CLAW_CLOSE;
-                robot.servoFlag.setPosition(params.FLAG_UP);
-                climbGrabStage = 4;
-            } else if (climbGrabStage == 4 && Climb_Timer.time()>3) {
-                robot.servoBar.setPosition(params.Bar_Up);
-                robot.servoWrist.setPosition(params.Wrist_Auto);
-            } else if (climbGrabStage == 5){
-                robot.motorClimb.setPower(1);
-                climbBase =  robot.CLIMB;
-                clawPosition = params.CLAW_OPEN;
-               robot.servoFlag.setPosition(params.FLAG_DOWN);
-                Climb_Timer.reset();
-                climbGrabStage = 6;
-            } else if (climbGrabStage == 6 && Climb_Timer.time()>.3){
-                robot.servoBar.setPosition(params.Bar_Auto);
-                robot.servoExtend.setPosition(params.Extend_IN);
-                robot.servoExtendRight.setPosition(params.ExtendRight_IN);
-                robot.servoWrist.setPosition(params.Wrist_Auto);
-            }
-
-
-
-            if (gamepad2.y){
-                robot.servoBar.setPosition(params.Bar_Up);
-                robot.servoExtend.setPosition(params.Extend_OUT);
-                robot.servoExtendRight.setPosition(params.ExtendRight_OUT);
-            }
-             if (gamepad1.dpad_up && climbGrabStage == 4){
-                 climbGrabStage=5;
-
-             }
-            if (gamepad2.right_trigger>0.3) {
-                robot.motorClimb.setPower(1);
-                climbBase=climbBase+10;
-            }
-
-            // limit the max and min value of mBase
-            // robot.servoBar.setPosition(barPosition);
-            robot.servoClaw.setPosition(clawPosition);
-            robot.servoSpice.setPosition(spicePosition);
-            robot.servoTwist.setPosition(TwistPosition);
-
-//            //if gamepad2 left trigger is active the range clip will not apply
-//            if(!(gamepad2.left_trigger>0.3)) {
-//                mBase = Range.clip(mBase, params.LIFT_MIN_LOW, params.LIFT_MAX_HIGH);
-//            }
-
-
-            robot.motorClimb.setTargetPosition(climbBase);
-
-            mechOps.liftPosition(mBase);
 
             telemetry.addData("Left Front Motor Encoder = ", robot.motorLF.getCurrentPosition());
             telemetry.addData("Left Front Motor Current = ", robot.motorLF.getCurrent(CurrentUnit.AMPS));
@@ -353,11 +163,11 @@ public class RobotTeleOp extends LinearOpMode {
             telemetry.addData("Right Front Motor Current = ", robot.motorRF.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("Right Rear Motor Encoder = ", robot.motorRR.getCurrentPosition());
             telemetry.addData("Right Rear Motor Current = ", robot.motorRR.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Shooter = ", robot.motorShooter.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("TestPosition = ", testPosition);
             telemetry.addData("Status", "Running");
             telemetry.addData("Left Power", leftPower);
             telemetry.addData("Right Power", rightPower);
-            telemetry.addData("Lift set point", mBase);
 
             telemetry.addData("Eli Pink Shirt", "yes");
             telemetry.update();
