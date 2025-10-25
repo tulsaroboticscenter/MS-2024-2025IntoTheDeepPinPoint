@@ -78,13 +78,17 @@ public class RobotTeleOp extends LinearOpMode {
         robot.pinpoint.recalibrateIMU();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        //mechOps.restractStrings();
+
+
         // run until the end of the match (driver presses STOP)
         double leftPower = 0;
         double rightPower = 0;
         ElapsedTime buttonPressTimer = new ElapsedTime();
-        boolean clawOpen = false;
+        boolean flipperDown = false;
         int climbGrabStage = 1;
+        double flipperPostition = params.flipper_up;
+//        double spicePosition = params.SPICE_CLOSE;
+//        double TwistPosition = params.TWIST_HORIZONTAL;
         double botHeading;
         double x, y, rx;
         double rotX, rotY;
@@ -117,11 +121,11 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.motorShooter.setPower(0);
             }
             if (gamepad1.right_bumper){
-                robot.servoFLIPPER.setPosition(.2);
+                robot.servoFLIPPER.setPosition(params.flipper_up);
            //up or launch
             }
             if(gamepad1.left_bumper){
-                robot.servoFLIPPER.setPosition(.6);
+                robot.servoFLIPPER.setPosition(params.flipper_down);
             //down
             }
             if(gamepad1.y){
@@ -138,12 +142,23 @@ public class RobotTeleOp extends LinearOpMode {
                 shooterPower=shooterPower+0.05;
                 robot.motorShooter.setPower(shooterPower);
             }
-//            if (gamepad1.a) {
-//                // X
-//                clawPosition = params.CLAW_OPEN;
-//                spicePosition = params.SPICE_OPEN;
-//                clawOpen = true;
+
+            if (gamepad1.right_bumper) {
+                if((buttonPressTimer.time() > 0.25) && flipperDown){
+                    flipperPostition = params.flipper_down;
+                    flipperDown= false;
+                    buttonPressTimer.reset();
+                } else if(buttonPressTimer.time() > 0.25) {
+                    flipperPostition = params.flipper_up;
+                    flipperDown = true;
+                    buttonPressTimer.reset();
+                }
+            }
 //            }
+//            robot.servoClaw.setPosition(clawPosition);
+//            robot.servoSpice.setPosition(spicePosition);
+//            robot.servoTwist.setPosition(TwistPosition);
+
             robot.pinpoint.update();    //update the IMU value
             Pose2D pos = robot.pinpoint.getPosition();
             String data = String.format(Locale.US, "{X: %.3f, Y: %.3f, H: %.3f}", pos.getX(DistanceUnit.MM), pos.getY(DistanceUnit.MM), pos.getHeading(AngleUnit.RADIANS));
