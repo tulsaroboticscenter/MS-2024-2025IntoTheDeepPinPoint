@@ -90,6 +90,7 @@ public class RobotTeleOp extends LinearOpMode {
         double rotX, rotY;
         double denominator, frontLeftPower, backLeftPower, frontRightPower, backRightPower;
         double powerFactor = 1;
+        double shooterPower = 0;
         while (opModeIsActive()) {
 
             /* ###########################################
@@ -110,16 +111,32 @@ public class RobotTeleOp extends LinearOpMode {
                 //recalibrates the IMU without resetting position
             }
             if(gamepad1.x){
-                robot.motorShooter.setPower(1);
+                robot.motorShooter.setPower(shooterPower);
             }
             if(gamepad1.a){
                 robot.motorShooter.setPower(0);
             }
             if (gamepad1.right_bumper){
-                robot.servoFLIPPER.setPosition(.25);
+                robot.servoFLIPPER.setPosition(.2);
+           //up or launch
             }
             if(gamepad1.left_bumper){
-                robot.servoFLIPPER.setPosition(0);
+                robot.servoFLIPPER.setPosition(.6);
+            //down
+            }
+            if(gamepad1.y){
+                robot.motorIntake.setPower(1);
+            }
+            if(gamepad1.b){
+                robot.motorIntake.setPower(0);
+            }
+            if(gamepad1.dpad_down){
+                shooterPower=shooterPower-0.05;
+                robot.motorShooter.setPower(shooterPower);
+            }
+            if(gamepad1.dpad_up){
+                shooterPower=shooterPower+0.05;
+                robot.motorShooter.setPower(shooterPower);
             }
 //            if (gamepad1.a) {
 //                // X
@@ -153,6 +170,8 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
 
+
+            telemetry.addData("shooterPower = ",shooterPower);
 
             telemetry.addData("Left Front Motor Encoder = ", robot.motorLF.getCurrentPosition());
             telemetry.addData("Left Front Motor Current = ", robot.motorLF.getCurrent(CurrentUnit.AMPS));
