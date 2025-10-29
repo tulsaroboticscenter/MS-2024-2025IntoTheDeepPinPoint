@@ -137,15 +137,16 @@ public class RobotTeleOp extends LinearOpMode {
             }
 
             if(gamepad1.dpad_right){
-                if((buttonPressTimer.time() > 0.25) && intakeOff){
-                    intakePower = params.Intake_OFF;
-                    intakeOff= false;
-                    buttonPressTimer.reset();
-                } else if(buttonPressTimer.time() > 0.25) {
-                    intakePower = params.Intake_ON;
-                    intakeOff = true;
-                    buttonPressTimer.reset();
-                }
+                robot.motorIntake.setPower(params.Feeder_ON);
+//                if((buttonPressTimer.time() > 0.25) && intakeOff){
+//                    intakePower = params.Intake_OFF;
+//                    intakeOff= false;
+//                    buttonPressTimer.reset();
+//                } else if(buttonPressTimer.time() > 0.25) {
+//                    intakePower = params.Intake_ON;
+//                    intakeOff = true;
+//                    buttonPressTimer.reset();
+//                }
             }
 
             if(gamepad1.dpad_left){
