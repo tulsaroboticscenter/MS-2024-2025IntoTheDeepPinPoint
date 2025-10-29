@@ -68,6 +68,7 @@ public class RobotTeleOp extends LinearOpMode {
     public MSMechOps mechOps = new MSMechOps(robot, opMode, params);
 
     private double testPosition = 0;
+    private double angularRate = 0;
 
     public void runOpMode() {
         robot.init(hardwareMap, true);
@@ -85,8 +86,11 @@ public class RobotTeleOp extends LinearOpMode {
         double rightPower = 0;
         ElapsedTime buttonPressTimer = new ElapsedTime();
         boolean flipperDown = false;
+        boolean intakeOff = false;
         int climbGrabStage = 1;
         double flipperPostition = params.flipper_up;
+        double intakePower = params.Intake_OFF;
+
 //        double spicePosition = params.SPICE_CLOSE;
 //        double TwistPosition = params.TWIST_HORIZONTAL;
         double botHeading;
@@ -114,33 +118,56 @@ public class RobotTeleOp extends LinearOpMode {
                 robot.pinpoint.recalibrateIMU();
                 //recalibrates the IMU without resetting position
             }
-            if(gamepad1.x){
-                robot.motorShooter.setPower(shooterPower);
+            if (gamepad1.x) {
+                shooterPower = 1;
+                angularRate = 1;
             }
-            if(gamepad1.a){
-                robot.motorShooter.setPower(0);
+            if (gamepad1.a) {
+                shooterPower = 0;
+                angularRate = 0;
             }
-            if (gamepad1.right_bumper){
-                robot.servoFLIPPER.setPosition(params.flipper_up);
-           //up or launch
+
+
+            if (gamepad1.right_trigger > .25) {
+                robot.motorFeeder.setPower(params.Feeder_ON);
+            }else if (gamepad1.left_trigger > .25) {
+                robot.motorFeeder.setPower(params.Feeder_REV);
+            } else {
+                robot.motorFeeder.setPower(params.Feeder_OFF);
             }
-            if(gamepad1.left_bumper){
-                robot.servoFLIPPER.setPosition(params.flipper_down);
-            //down
+
+            if(gamepad1.dpad_right){
+                if((buttonPressTimer.time() > 0.25) && intakeOff){
+                    intakePower = params.Intake_OFF;
+                    intakeOff= false;
+                    buttonPressTimer.reset();
+                } else if(buttonPressTimer.time() > 0.25) {
+                    intakePower = params.Intake_ON;
+                    intakeOff = true;
+                    buttonPressTimer.reset();
+                }
             }
-            if(gamepad1.y){
-                robot.motorIntake.setPower(1);
-            }
-            if(gamepad1.b){
+
+            if(gamepad1.dpad_left){
                 robot.motorIntake.setPower(0);
             }
+
+
             if(gamepad1.dpad_down){
-                shooterPower=shooterPower-0.05;
-                robot.motorShooter.setPower(shooterPower);
+                if((buttonPressTimer.time() > 0.25)) {
+                    shooterPower = shooterPower - 0.05;
+                    angularRate = angularRate - 1;
+                    buttonPressTimer.reset();
+                }
+
             }
             if(gamepad1.dpad_up){
-                shooterPower=shooterPower+0.05;
-                robot.motorShooter.setPower(shooterPower);
+                if((buttonPressTimer.time() > 0.25)) {
+                    shooterPower = shooterPower + 0.05;
+                    angularRate = angularRate + 1;
+                    buttonPressTimer.reset();
+                }
+
             }
 
             if (gamepad1.right_bumper) {
@@ -169,7 +196,7 @@ public class RobotTeleOp extends LinearOpMode {
 
            rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
            rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-          rotX = rotX * 1.1;  // Counteract imperfect strafing
+           rotX = rotX * 1.1;  // Counteract imperfect strafing
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -184,6 +211,8 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorLR.setPower(backLeftPower * powerFactor);
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
+//            robot.motorShooter.setPower(shooterPower);
+            robot.motorShooter.setVelocity(angularRate);
 
 
             telemetry.addData("shooterPower = ",shooterPower);
@@ -197,7 +226,9 @@ public class RobotTeleOp extends LinearOpMode {
             telemetry.addData("Right Rear Motor Encoder = ", robot.motorRR.getCurrentPosition());
             telemetry.addData("Right Rear Motor Current = ", robot.motorRR.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("Shooter = ", robot.motorShooter.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Shooter RPM = ", robot.motorShooter.getVelocity());
             telemetry.addData("TestPosition = ", testPosition);
+            telemetry.addData("Angular Rate = ", angularRate);
             telemetry.addData("Status", "Running");
             telemetry.addData("Left Power", leftPower);
             telemetry.addData("Right Power", rightPower);

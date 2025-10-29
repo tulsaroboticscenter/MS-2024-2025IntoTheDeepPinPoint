@@ -62,6 +62,7 @@ public class HWProfile2 {
     public DcMotorEx motorRR;
     public DcMotorEx motorShooter;
     public DcMotorEx motorIntake;
+    public DcMotorEx motorFeeder;
 
     public Servo servoFLIPPER;
 
@@ -162,7 +163,7 @@ public class HWProfile2 {
         motorShooter.setDirection(DcMotor.Direction.FORWARD);
         motorShooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         motorShooter.setTargetPosition(0);
-        motorShooter.setPower(1);
+        motorShooter.setPower(0);
         motorShooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         motorShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -173,6 +174,14 @@ public class HWProfile2 {
         motorIntake.setPower(0);
         motorIntake.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         motorIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        motorFeeder = ahwMap.get(DcMotorEx.class, "motorFeeder");
+        motorFeeder.setDirection(DcMotor.Direction.FORWARD);
+        motorFeeder.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        motorFeeder.setTargetPosition(0);
+        motorFeeder.setPower(0);
+        motorFeeder.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        motorFeeder.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /**
          * Initialize Servos
