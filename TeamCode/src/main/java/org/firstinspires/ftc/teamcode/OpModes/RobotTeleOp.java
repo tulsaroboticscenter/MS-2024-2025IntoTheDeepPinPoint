@@ -119,13 +119,14 @@ public class RobotTeleOp extends LinearOpMode {
                 //recalibrates the IMU without resetting position
             }
             if (gamepad1.x) {
-                shooterPower = 1;
+                shooterPower = .7;
                 angularRate = 1;
             }
             if (gamepad1.a) {
                 shooterPower = 0;
                 angularRate = 0;
             }
+
 
 
             if (gamepad1.right_trigger > .25) {
@@ -212,8 +213,8 @@ public class RobotTeleOp extends LinearOpMode {
             robot.motorLR.setPower(backLeftPower * powerFactor);
             robot.motorRF.setPower(frontRightPower * powerFactor);
             robot.motorRR.setPower(backRightPower * powerFactor);
-//            robot.motorShooter.setPower(shooterPower);
-            robot.motorShooter.setVelocity(angularRate);
+            robot.motorShooter.setPower(shooterPower);
+ //           robot.motorShooter.setVelocity(angularRate);
 
 
             telemetry.addData("shooterPower = ",shooterPower);
